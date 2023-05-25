@@ -1,4 +1,12 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: karmada-system
+spec:
+  finalizers:
+  - kubernetes
+---
 # Source: karmada/templates/etcd.yaml
 apiVersion: v1
 kind: Service
