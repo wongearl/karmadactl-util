@@ -16,14 +16,14 @@ type Join struct {
 	KarmadaContext               string
 }
 
-func (j *Join) JoinCluster(k8sClient kubernetes.Interface) (stdout, stderr []byte, err error) {
+func (j *Join) JoinCluster(k8sClient kubernetes.Interface) (stdout, stderr string, err error) {
 	clusterKubeconfigPath, err := common.WriteKubeconfig("/tmp/clusterKubeconfig", j.ClusterConfigSecretName, j.ClusterConfigSecretNamespace, k8sClient)
 	if err != nil {
-		return nil, nil, err
+		return stdout, stderr, err
 	}
 	karmadaKubeconfig, err := common.WriteKubeconfig("/tmp/karmadaKubeconfig", j.KarmadaConfigSecretName, j.KarmadaConfigSecretNamespace, k8sClient)
 	if err != nil {
-		return nil, nil, err
+		return stdout, stderr, err
 	}
 	return common.ExecAtLocal(filepath.Join("karmadactl"), "join", j.ClusterName, "--kubeconfig="+karmadaKubeconfig,
 		"--karmada-context="+j.KarmadaContext, "--cluster-kubeconfig="+clusterKubeconfigPath)

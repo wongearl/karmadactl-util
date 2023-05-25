@@ -11,14 +11,14 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-func ExecAtLocal(cmd string, args ...string) ([]byte, []byte, error) {
+func ExecAtLocal(cmd string, args ...string) (string, string, error) {
 	var stdout, stderr bytes.Buffer
 	command := exec.Command(cmd, args...)
 	command.Stdout = &stdout
 	command.Stderr = &stderr
 
 	err := command.Run()
-	return stdout.Bytes(), stderr.Bytes(), err
+	return stdout.String(), stderr.String(), err
 }
 
 func WriteKubeconfig(kubeconfigPath, secretName, secretNamespace string, k8sClient kubernetes.Interface) (string, error) {
