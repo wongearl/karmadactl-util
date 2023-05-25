@@ -52,7 +52,7 @@ func testUnJoin(k8sClient kubernetes.Interface) {
 			KarmadaContext:               "karmada-apiserver",
 		},
 	}
-	stdout, stderr, err := u.JoinCluster(k8sClient)
+	stdout, stderr, err := u.UnJoinCluster(k8sClient)
 	if err != nil {
 		fmt.Println("err:", err, "stderr:", stderr)
 		return

@@ -13,7 +13,7 @@ type Unjoin struct {
 	Force bool
 }
 
-func (u *Unjoin) JoinCluster(k8sClient kubernetes.Interface) (stdout, stderr string, err error) {
+func (u *Unjoin) UnJoinCluster(k8sClient kubernetes.Interface) (stdout, stderr string, err error) {
 	clusterKubeconfigPath, err := common.WriteKubeconfig("/tmp/clusterKubeconfig", u.ClusterConfigSecretName, u.ClusterConfigSecretNamespace, k8sClient)
 	if err != nil {
 		return stdout, stderr, err
