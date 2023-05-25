@@ -8,12 +8,7 @@ import (
 )
 
 type Join struct {
-	ClusterName                  string
-	ClusterConfigSecretName      string
-	ClusterConfigSecretNamespace string
-	KarmadaConfigSecretName      string
-	KarmadaConfigSecretNamespace string
-	KarmadaContext               string
+	common.KarmdactlArg
 }
 
 func (j *Join) JoinCluster(k8sClient kubernetes.Interface) (stdout, stderr string, err error) {
@@ -26,5 +21,5 @@ func (j *Join) JoinCluster(k8sClient kubernetes.Interface) (stdout, stderr strin
 		return stdout, stderr, err
 	}
 	return common.ExecAtLocal(filepath.Join("karmadactl"), "join", j.ClusterName, "--kubeconfig="+karmadaKubeconfig,
-		"--karmada-context="+j.KarmadaContext, "--cluster-kubeconfig="+clusterKubeconfigPath)
+		"--karmada-context="+j.KarmadaContext, "--cluster-kubeconfig="+clusterKubeconfigPath, "--cluster-context="+j.ClusterContext)
 }

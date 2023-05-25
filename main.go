@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/wongearl/karmadactl-util/pkg/join"
 	"github.com/wongearl/karmadactl-util/pkg/k8sclient"
 	"k8s.io/client-go/kubernetes"
@@ -21,6 +22,7 @@ func testJoin(k8sClient kubernetes.Interface) {
 		ClusterName:                  "member1",
 		ClusterConfigSecretName:      "member-config",
 		ClusterConfigSecretNamespace: "default",
+		ClusterContext:               "kubernetes-admin@cluster.local",
 		KarmadaConfigSecretName:      "karmada-kubeconfig",
 		KarmadaConfigSecretNamespace: "karmada-system",
 		KarmadaContext:               "karmada-apiserver",

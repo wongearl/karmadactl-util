@@ -11,6 +11,16 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
+type KarmdactlArg struct {
+	ClusterName                  string
+	ClusterConfigSecretName      string
+	ClusterConfigSecretNamespace string
+	ClusterContext               string
+	KarmadaConfigSecretName      string
+	KarmadaConfigSecretNamespace string
+	KarmadaContext               string
+}
+
 func ExecAtLocal(cmd string, args ...string) (string, string, error) {
 	var stdout, stderr bytes.Buffer
 	command := exec.Command(cmd, args...)
